@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  micromongoapi:
+    image: ${DOCKER_REGISTRY-}micromongoapi
+    build:
+      context: .
+      dockerfile: Dockerfile
