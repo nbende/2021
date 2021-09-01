@@ -1,0 +1,38 @@
+﻿@model List<string> 
+
+@*@{ ViewBag.Title = "Index"; }*@
+<h2>Index</h2>
+
+<form class="col-md-12" method="post" asp-action="Add" asp-controller="Blob" enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="file" class="form-control" name="file" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Upload</button>
+    </div>
+</form>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <input type="button" name="b1" id="b1" value="Delete" onclick="Remove('@item')" /> 
+            <video src="@item" height="200" width="200" controls />
+        </li>
+    }
+</ul> 
+
+
+@section scripts{
+
+    <script>function Remove(x) {
+            alert(x);
+    var uri = "/Blob/remove";
+    $.post(uri, { name: x }, function (y)
+    {
+        window.location.href = "/blob/index"; alert(y);
+    });
+
+}</script>
+}
