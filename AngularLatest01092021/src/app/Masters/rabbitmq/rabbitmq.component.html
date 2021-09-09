@@ -1,0 +1,80 @@
+<section class="mt-5 dashBoardMain">
+
+    <div class="contentMain">
+        <div class="row">
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <!-- <li class="breadcrumb-item"><a [routerLink]="['/Masters/Dashboard',{id:uId}]">Home</a></li> -->
+                        <!-- <li class="breadcrumb-item active" aria-current="page">Masters</li>-->
+
+                        <!-- <li class="breadcrumb-item active" aria-current="page">Complaint</li> -->
+                        <!-- <li class="rightBtn"><a href="#!" data-toggle="modal" data-target="#createProduct" (click)="dilog()"
+                  title="Click to Create" class=" btn-success btn btn-sm">Create</a></li> -->
+                        <div class="form-group mt-2 pull-right">
+                            <button class="btn btn-success btn-sm" data-toggle="modal" (click)="dilog()"><i
+                                    class="fa fa-plus" aria-hidden="true"></i> Create</button>
+                        </div>
+
+                    </ol>
+                </nav>
+
+
+                <div class="cusTable">
+                    <table class="table-striped table">
+                        <!-- <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table-striped table "> -->
+                        <thead>
+                            <tr>
+                                <th width="80" class="text-center">&nbsp; S.No.</th>
+                                <th>ComplaintId</th>
+                                <th>EmployeeName</th>
+                                <th>ComplaintOnEmployee</th>
+
+
+                                <!-- <th>Status</th> -->
+                                <th class="text-center" width="80">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let p of compliant;let i = index">
+                                <td align="center">{{i + 1}}</td>
+                                <td>{{p.complaintId}}</td>
+                                <td>{{p.complaintName}}</td>
+                                <td>{{p.complaintOnEmployee}}</td>
+
+                                <td align="center">
+                                    <!-- <button class="editBtn" (click)="showDialog1 = !showDialog1" title="Click to Update"
+                      (click)="Edit(p.id)">
+                      <span class="fa fa-pencil"></span>
+                    </button> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<app-popup [(visible)]="showDialog" class="mdModal newForm" (onClose)="popupClosed()">
+    <div class="modal-header">
+        <h5 class="modal-title">Create Message</h5>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="ComplaintCategory" (ngSubmit)="AddMessage()" class="mm">
+            <label> Complaint Name<span style="color: red">*</span></label>
+            <input type="text" class="form-control" formControlName="complaintId">
+            <label> Complaint Name<span style="color: red">*</span></label>
+            <input type="text" class="form-control" formControlName="complaintName">
+            <label> ComplaintOnEmployee<span style="color: red">*</span></label>
+            <input type="text" class="form-control" formControlName="complaintOnEmployee">
+            <div class="text-right">
+                <hr>
+                <button type="submit" class="btn btn-success btn-sm loginBtn minW80" title="Click to Create"
+                    id="iniBtn1">Create</button>
+            </div>
+        </form>
+    </div>
+</app-popup>

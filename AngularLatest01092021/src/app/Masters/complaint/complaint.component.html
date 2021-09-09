@@ -1,0 +1,131 @@
+<section class="mt-5 dashBoardMain">
+
+  <div class="contentMain">
+    <div class="row">
+      <div class="col-sm-6">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <!-- <li class="breadcrumb-item"><a [routerLink]="['/Masters/Dashboard',{id:uId}]">Home</a></li> -->
+            <!-- <li class="breadcrumb-item active" aria-current="page">Masters</li>-->
+
+            <!-- <li class="breadcrumb-item active" aria-current="page">Complaint</li> -->
+            <!-- <li class="rightBtn"><a href="#!" data-toggle="modal" data-target="#createProduct" (click)="dilog()"
+                title="Click to Create" class=" btn-success btn btn-sm">Create</a></li> -->
+                <div class="form-group mt-2 pull-right">
+                  <button class="btn btn-success btn-sm" data-toggle="modal" (click)="dilog()"><i class="fa fa-plus"
+                      aria-hidden="true"></i> Create</button>
+                </div>
+
+          </ol>
+        </nav>
+
+
+        <div class="cusTable">
+          <table class="table-striped table">
+            <!-- <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table-striped table "> -->
+            <thead>
+              <tr>
+                <th width="80" class="text-center">&nbsp; S.No.</th>
+                <th>ComplaintName</th>
+                <th>ComplaintOnEmployee</th>
+
+                <!-- <th>Status</th> -->
+                <th class="text-center" width="80">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of compliant1;let i = index">
+                <td align="center">{{i + 1}}</td>
+                <td>{{p.complaintName}}</td>
+                <td>{{p.complaintOnEmployee}}</td>
+                <td>{{p.status}}</td>
+                <td align="center">
+                  <button class="editBtn" (click)="showDialog1 = !showDialog1" title="Click to Update"
+                    (click)="Edit(p.id)">
+                    <span class="fa fa-pencil"></span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<app-popup [(visible)]="showDialog" class="mdModal newForm" (onClose)="popupClosed()">
+  <div class="modal-header">
+    <h5 class="modal-title">Create Complaint</h5>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="ComplaintCategory" (ngSubmit)="AddComplaintModes()" class="mm">
+      <label> Complaint Name<span style="color: red">*</span></label>
+      <input type="text" class="form-control" formControlName="complaintName">
+      <label> ComplaintOnEmployee<span style="color: red">*</span></label>
+      <input type="text" class="form-control" formControlName="ComplaintOnEmployee">
+      <!-- <div style="color: red" *ngIf="ComplaintCategory.get('ComplaintCategory').errors && submitted && flag">
+          Complaint Mode is required
+        </div> -->
+      <!-- <div style="color: red" *ngIf="ComplaintCategory.get('ComplaintCategory').errors && submitted && !flag">
+          Complaint Mode is AlreadyExist
+        </div>  -->
+      <div class="text-right">
+        <hr>
+        <button type="submit" class="btn btn-success btn-sm loginBtn minW80" title="Click to Create"
+          id="iniBtn1">Create</button>
+      </div>
+    </form>
+  </div>
+</app-popup>
+<app-popup [(visible)]="showDialog1" class="mdModal newForm" (onClose)="popupClosed()">
+  <div class="modal-header">
+    <h5 class="modal-title">Update Complaint</h5>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editcomplaint" (ngSubmit)="Update()" class="mm">
+      <div class="form-group">
+        <!-- <input type="text" class="form-control" [(ngModel)]=" EditData.id " hidden formControlName="id"> -->
+        <label> Complaint Name<span style="color: red">*</span></label>
+        <input type="text" class="form-control" formControlName="complaintName">
+        <label> ComplaintOnEmployee<span style="color: red">*</span></label>
+        <input type="text" class="form-control"
+          formControlName="complaintOnEmployee">
+      </div>
+      <!-- <label> Comments<span style="color: red">*</span><i>(160 characters only)</i></label> 
+        <input type="text" class="form-control" 
+            [(ngModel)]="compliantModenn.comments" formControlName="Comments" [readonly]="readonlyFlag"> 
+         <textarea maxlength="160" placeholder="Comments" class="form-control" [(ngModel)]="compliantModenn.comments"
+            formControlName="Comments" [readonly]="readonlyFlag"></textarea> -->
+      <!-- <div class="form-group">
+          <label> Comments<span style="color:red">*</span><i>(160 characters only)</i></label>
+          <textarea maxlength="160" placeholder="Comments" class="form-control" formControlName="Comments"></textarea>
+        </div> -->
+
+      <!-- <div class="form-inline">
+          <input type="checkbox" value="" [checked]="ischeckedWithOutBoolean"
+            (change)="ischeckedWithOutBoolean = $event.target.checked ? 'Y': 'N'">
+          <label>Enable</label>
+        </div> -->
+
+      <!-- <div *ngIf="showEnable" class="inavlid-feedback" style="color: red;">{{validationmsg}}
+        </div>
+        <div *ngIf="showNoChanges" class="inavlid-feedback" style=" color: red;">No Changes Done
+        </div>
+        <div>
+  
+        </div> -->
+      <!-- <div *ngIf="showalready" class="inavlid-feedback" style=" color: red;">Already Exist</div> -->
+      <div class="text-right">
+        <hr>
+        <button class="btn btn-success btn-sm minW100" [disabled]="editcomplaint.invalid" type="submit"
+          data-toggle="tooltip" data-placement="bottom" title="Click to update">Update</button>
+      </div>
+
+
+
+    </form>
+
+  </div>
+</app-popup>
